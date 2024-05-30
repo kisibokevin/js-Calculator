@@ -14,20 +14,24 @@ document.addEventListener("DOMContentLoaded", function() {
 
             display.value += number.value;
         })
-    })
+    });
 
     operators.forEach(function(operator) {
         operator.addEventListener("click", function() {
-            if (operator.value === "+" || operator.value === "-" || operator.value === "*" || operator.value === "/" || operator.value === ".") {
+            if (["+", "-", "*", "/", "."].includes(operator.value)) {
                 display.value += operator.value;
             } else if (operator.value === "AC") {
                 display.value = "";
             } else if (operator.value === "DEL") {
                 display.value = display.value.slice(0, -1);
-            } else{
-                display.value = eval(display.value);
+            } else {
+                try {
+                    display.value = eval(display.value);
+                } catch {
+                    display.value = "NaN";
+                }
             }
-        })
-    })
+        });
+    });
 
-})
+});
